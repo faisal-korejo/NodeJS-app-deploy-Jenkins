@@ -8,27 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Install MongoDB') {
-            steps {
-                echo "Ensuring MongoDB is installed and running..."
-                sh """
-                # Install MongoDB if not installed
-                if ! command -v mongod &> /dev/null
-                then
-                    sudo apt update
-                    sudo apt install -y mongodb
-                fi
-
-                # Start MongoDB service
-                sudo systemctl start mongodb || true
-                sudo systemctl enable mongodb || true
-
-                # Optional: show MongoDB status
-                sudo systemctl status mongodb | head -n 10
-                """
-            }
-        }
-
         stage('Install Backend Dependencies') {
             steps {
                 dir("${BACKEND_PATH}") {
