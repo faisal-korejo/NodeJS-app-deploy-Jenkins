@@ -117,20 +117,21 @@ pipeline {
         failure {
             echo "Deployment failed! Triggering rollback..."
             sh """
-                ssh -i ${SSH_KEY} ${DEPLOY_SERVER} '
-                    BACKUP_FILE=$(ls -t ${DEPLOY_PATH_BACKEND}/backup/backup_*.tar.gz | head -1)
-                    if [ -f "$BACKUP_FILE" ]; then
-                        tar -xzf $BACKUP_FILE -C ${DEPLOY_PATH_BACKEND}
-                        pm2 restart ${PM2_APP_NAME}
-                    fi
+                ssh -i \${SSH_KEY} \${DEPLOY_SERVER} '
+                    BACKUP_FILE=\$(ls -t \${DEPLOY_PATH_BACKEND}/backup/backup_*.tar.gz | head -1)
+                if [ -f "\$BACKUP_FILE" ]; then
+                    tar -xzf \$BACKUP_FILE -C \${DEPLOY_PATH_BACKEND}
+                    pm2 restart \${PM2_APP_NAME}
+                fi
 
-                    BACKUP_FRONTEND=$(ls -t ${DEPLOY_PATH_FRONTEND}/backup/backup_*.tar.gz | head -1)
-                    if [ -f "$BACKUP_FRONTEND" ]; then
-                        tar -xzf $BACKUP_FRONTEND -C ${DEPLOY_PATH_FRONTEND}
-                        sudo nginx -s reload
-                    fi
-                '
-            """
-        }
+                    BACKUP_FRONTEND=\$(ls -t \${DEPLOY_PATH_FRONTEND}/backup/backup_*.tar.gz | head -1)
+                if [ -f "\$BACKUP_FRONTEND" ]; then
+                    tar -xzf \$BACKUP_FRONTEND -C \${DEPLOY_PATH_FRONTEND}
+                    sudo nginx -s reload
+                fi
+            '
+        """
+       }
+
     }
 }
