@@ -29,6 +29,7 @@ pipeline {
                 dir("${BACKEND_PATH}") {
                     echo "Installing backend dependencies..."
                     sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
