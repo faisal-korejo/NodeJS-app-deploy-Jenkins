@@ -11,7 +11,7 @@ pipeline {
         stage('Install Backend Dependencies') {
             steps {
                 dir("${BACKEND_PATH}") {
-                    sh 'npm install'
+                    sh 'sudo npm install'
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage('Install Frontend Dependencies') {
             steps {
                 dir("${FRONTEND_PATH}") {
-                    sh 'npm install'
+                    sh 'sudo npm install'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir("${FRONTEND_PATH}") {
-                    sh 'npm run build'
+                    sh 'sudo npm run build'
                 }
             }
         }
