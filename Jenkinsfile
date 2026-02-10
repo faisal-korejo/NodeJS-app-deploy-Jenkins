@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        BACKEND_PATH = "/home/ubuntu/NodeJS-app-deploy-Jenkins/backend"
-        FRONTEND_PATH = "/home/ubuntu/NodeJS-app-deploy-Jenkins/frontend"
+        BACKEND_PATH = "/var/lib/jenkins/projects/NodeJS-app-deploy-Jenkins/backend"
+        FRONTEND_PATH = "/var/lib/jenkins/projects/NodeJS-app-deploy-Jenkins/frontend"
         BUILD_PATH = "/var/www/html/yourapp"
     }
 
