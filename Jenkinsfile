@@ -4,7 +4,7 @@ pipeline {
     environment {
         BACKEND_PATH = "${WORKSPACE}/backend"
         FRONTEND_PATH = "${WORKSPACE}/frontend"
-        DEPLOY_SERVER = "ubuntu@YOUR_SERVER_IP" 
+        DEPLOY_SERVER = "ubuntu@16.171.38.133" 
         DEPLOY_PATH_BACKEND = "/var/www/backend" 
         DEPLOY_PATH_FRONTEND = "/var/www/frontend" 
         SSH_KEY = "/var/lib/jenkins/.ssh/id_rsa" 
@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-        stage('Install Backend Dependencies') {
+        stage('Build Backend Dependencies') {
             steps {
                 dir("${BACKEND_PATH}") {
                     echo "Installing backend dependencies..."
